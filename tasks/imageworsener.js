@@ -19,10 +19,17 @@ module.exports = function (grunt) {
 
     args.push(options.output, options.url);
 
-    //console.log(this);
-
+    // Iterate over all src-dest file pairs.
     this.files.forEach(function(f) {
-      console.log(f);
+      var src = f.orig.src.filter(function(filepath) {
+        // Warn on and remove invalid source files (if nonull was set).
+        if (!grunt.file.exists(filepath)) {
+          grunt.log.warn('Source file "' + filepath + '" not found.');
+          return false;
+        }
+        return true;
+      });
+      console.log(src);
     });
 
     /*grunt.util.spawn({

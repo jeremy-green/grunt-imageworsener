@@ -17,8 +17,10 @@ module.exports = function (grunt) {
       options: {
 
       },
-      files: {
-        'image.png': ['image.png']
+      dist: {
+        files: {
+          'img': ['img']
+        }
       }
     }
   });
@@ -30,5 +32,5 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Register default task
-  grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('default', ['imageworsener']);
 };
