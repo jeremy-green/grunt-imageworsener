@@ -8,38 +8,45 @@
 'use strict';
 
 module.exports = function (grunt) {
+  var path = require('path');
+  var os = require('os');
+  var numCPUs = os.cpus().length;
+
   var _ = grunt.util._;
 
   grunt.registerMultiTask('imageworsener', 'ImageWorsener task runner for grunt.', function () {
+
+    if (!this.files[0]) {
+      grunt.fail.fatal('No src or invalid src provided.');
+      return;
+    }
+
     var done = this.async();
     var options = this.options({
-      //output: '-dump'
+      //default options
     });
-    var args = options.args || [];
 
-    args.push(options.output, options.url);
+    grunt.util.async.forEachLimit(this.files, numCPUs, function (file, next) {
+      var args = options.args || [];
 
-    // Iterate over all src-dest file pairs.
-    this.files.forEach(function(f) {
-      var src = f.orig.src.filter(function(filepath) {
-        // Warn on and remove invalid source files (if nonull was set).
-        if (!grunt.file.exists(filepath)) {
-          grunt.log.warn('Source file "' + filepath + '" not found.');
-          return false;
-        }
-        return true;
+      var src = file.src[0];
+      var dest = path.join(file.dest, path.basename(src));
+
+      args.push(src, dest);
+
+      if (!grunt.file.exists(path.dirname(dest))) {
+         grunt.file.mkdir(path.dirname(dest));
+      }
+
+      grunt.util.spawn({
+        cmd: 'imagew',
+        args: args
+      }, function (error, result, code) {
+        grunt.log.writeln('Saving image to ' + dest);
+        done(error);
       });
-      console.log(src);
+
+      //next();
     });
-
-    /*grunt.util.spawn({
-      cmd: 'imagew',
-      args: args
-    }, function (error, result, code) {
-      grunt.log.writeln();
-      grunt.file.write();
-      done(error);
-    });*/
-
   });
 };
