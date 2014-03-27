@@ -26,7 +26,50 @@ module.exports = function (grunt) {
       //default options
     });
 
-    grunt.util.async.forEachLimit(this.files, numCPUs, function (file, next) {
+    this.files.forEach(function(file) {
+
+      file.src.forEach(function(f) {
+
+        var src = f;
+        var args = options.args || [];
+
+        var dest = path.join(file.dest, path.basename(src));
+        console.log('DEST', dest);
+
+        if (!grunt.file.exists(path.dirname(dest))) {
+           grunt.file.mkdir(path.dirname(dest));
+        }
+
+        args.push(src, dest);
+
+        //console.log('ARGS:', args);
+
+        grunt.util.spawn({
+          cmd: 'imagew',
+          args: args
+        }, function (error, result, code) {
+          var srcIndex = args.indexOf(src);
+          console.log(srcIndex, args);
+          if (srcIndex > -1) {
+            args = args.splice(srcIndex, 1);
+          }
+          console.log(args);
+          var destIndex = args.indexOf(dest);
+          if (destIndex > -1) {
+            args = args.splice(destIndex, 1);
+          }
+          grunt.log.writeln('Saving image to ' + dest);
+          done(error);
+        });
+
+
+
+
+      });
+    });
+
+    /*grunt.util.async.forEachLimit(this.files, numCPUs, function (file, next) {
+
       var args = options.args || [];
 
       var src = file.src[0];
@@ -47,6 +90,6 @@ module.exports = function (grunt) {
       });
 
       //next();
-    });
+    });*/
   });
 };
