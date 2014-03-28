@@ -19,7 +19,7 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          'img/dist': ['img/**/*.{png,jpg,gif}']
+          'img/dist': ['img/*.{png,jpg,gif}']
         }
       }
     }
