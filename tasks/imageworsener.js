@@ -23,8 +23,12 @@ module.exports = function (grunt) {
     var options = this.options({
       //default options
     });
-    var args = options.args || [];
-
+    var args = [];
+    for (var key in options.args) {
+      if (options.args.hasOwnProperty(key)) {
+        args.push('-' + key, options.args[key].toString());
+      }
+    }
 
     grunt.util.async.forEachLimit(this.files, numCPUs, function (file, next) {
 

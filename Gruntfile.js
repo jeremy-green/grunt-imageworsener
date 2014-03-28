@@ -15,7 +15,13 @@ module.exports = function (grunt) {
     },
     imageworsener: {
       options: {
-        args: ['-h', '90', '-bkgd', '88f,0f0', '-cc', '2', '-dither', 'f']
+        //args: ['-h', '90', '-bkgd', '88f,0f0', '-cc', '2', '-dither', 'f']
+        args: {
+          h: 90,
+          bkgd: '88f,0f0',
+          cc: 2,
+          dither: 'f'
+        }
       },
       dist: {
         files: {
