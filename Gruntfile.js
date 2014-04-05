@@ -1,3 +1,10 @@
+/*
+ * grunt-imageworsener
+ * https://github.com/jeremy-green/grunt-imageworsener
+ *
+ * Copyright (c) 2014 Jeremy Green
+ * Licensed under the MIT license.
+ */
 'use strict';
 
 module.exports = function (grunt) {
@@ -15,7 +22,6 @@ module.exports = function (grunt) {
     },
     imageworsener: {
       options: {
-        //args: ['-h', '90', '-bkgd', '88f,0f0', '-cc', '2', '-dither', 'f']
         args: {
           h: 90,
           bkgd: '88f,0f0',
@@ -38,5 +44,5 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Register default task
-  grunt.registerTask('default', ['imageworsener']);
+  grunt.registerTask('default', 'jshint');
 };

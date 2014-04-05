@@ -2,7 +2,7 @@
  * grunt-imageworsener
  * https://github.com/jeremy-green/grunt-imageworsener
  *
- * Copyright (c) 2013 Jeremy Green
+ * Copyright (c) 2014 Jeremy Green
  * Licensed under the MIT license.
  */
 'use strict';
