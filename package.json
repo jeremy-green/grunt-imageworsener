@@ -1,7 +1,7 @@
 {
   "name": "grunt-imageworsener",
   "description": "ImageWorsener task runner for grunt.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/jeremy-green/grunt-imageworsener",
   "author": {
     "name": "Jeremy Green",

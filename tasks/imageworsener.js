@@ -19,14 +19,20 @@ module.exports = function (grunt) {
       return;
     }
 
+    var val;
     var done = this.async();
     var options = this.options({
       //default options
     });
     var args = [];
+
     for (var key in options.args) {
+      val = options.args[key];
+      if (typeof val === 'object') {
+        val = val.join(',');
+      }
       if (options.args.hasOwnProperty(key)) {
-        args.push('-' + key, options.args[key].toString());
+        args.push('-' + key, val.toString());
       }
     }
 

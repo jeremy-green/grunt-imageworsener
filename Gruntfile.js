@@ -24,7 +24,8 @@ module.exports = function (grunt) {
       options: {
         args: {
           h: 90,
-          bkgd: '88f,0f0',
+          //bkgd: '88f,0f0',
+          bkgd: ['88f', '0f0'],
           cc: 2,
           dither: 'f'
         }
